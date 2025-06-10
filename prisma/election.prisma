@@ -23,6 +23,7 @@ model Election{
     startDate DateTime
     endDate DateTime
     isActive Boolean @default(true)
+    notes String?
     
     createdAt DateTime @default(now())
 
