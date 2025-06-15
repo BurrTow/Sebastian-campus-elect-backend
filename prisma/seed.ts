@@ -31,6 +31,66 @@ async function seedElections() {
     });
 }
 
+async function seedStudents() {
+    await prisma.student.upsert({
+        where: { studentId: 'STUDENT_1'},
+        update: {},
+        create:{
+            studentId: 'STUDENT_1',
+            email: 'msmacapagal@addu.edu.ph',
+            name: 'Matthew Sean C. Macapagal',
+            department: 'School of Engineering and Architecture'
+        }
+    })
+
+    await prisma.student.upsert({
+        where: { studentId: 'STUDENT_2'},
+        update: {},
+        create:{
+            studentId: 'STUDENT_2',
+            email: 'rmsebastian@addu.edu.ph',
+            name: 'Roberto M. Sebastian',
+            department: 'Information Technology'
+        }
+    })
+
+    await prisma.student.upsert({
+        where: { studentId: 'STUDENT_3'},
+        update: {},
+        create:{
+            studentId: 'STUDENT_3',
+            email: 'ljmorrow@addu.edu.ph',
+            name: 'Lily J. Morrow',
+            department: 'Perfomance Arts'
+        }
+    })
+}
+
+async function seedCandidates() {
+    await prisma.candidate.upsert({
+        where: { candidateId: 'CANDIDATE_1'},
+        update: {},
+        create: {
+            candidateId: 'CANDIDATE_1',
+            positionId: PRESIDENT25_ID,
+            studentId: 'STUDENT_1'
+        }
+    })
+    
+    await prisma.candidate.upsert({
+        where: { candidateId: 'CANDIDATE_2'},
+        update: {},
+        create: {
+            candidateId: 'CANDIDATE_12',
+            positionId: PRESIDENT25_ID,
+            studentId: 'STUDENT_2'
+        }
+    })
+}
+
+const prisma = new PrismaClient()
+const PRESIDENT25_ID = 'election-2025-president'
+
 async function main(){
     console.log("SEEDING DATABASE...");
 
