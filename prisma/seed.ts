@@ -81,24 +81,24 @@ async function seedCandidates() {
         where: { candidateId: 'CANDIDATE_2'},
         update: {},
         create: {
-            candidateId: 'CANDIDATE_12',
+            candidateId: 'CANDIDATE_2',
             positionId: PRESIDENT25_ID,
             studentId: 'STUDENT_2'
         }
     })
 }
 
-const prisma = new PrismaClient()
-const PRESIDENT25_ID = 'election-2025-president'
 
 async function main(){
     console.log("SEEDING DATABASE...");
 
-    await seedElections();
+    await seedElections()
+
+    await seedElections()
+    await seedStudents()
+    await seedCandidates()
 
     console.log("FINISHED SEEDING");
-
-
 
 }
 void main()
