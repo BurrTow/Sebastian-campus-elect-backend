@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
-const PRESIDENT25_ID = "election-2025-president";
+
 
 async function seedElections() {
     const election25 = await prisma.election.upsert({
@@ -88,11 +87,11 @@ async function seedCandidates() {
     })
 }
 
+const prisma = new PrismaClient();
+const PRESIDENT25_ID = "election-2025-president";
 
 async function main(){
     console.log("SEEDING DATABASE...");
-
-    await seedElections()
 
     await seedElections()
     await seedStudents()
