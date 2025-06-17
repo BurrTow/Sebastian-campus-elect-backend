@@ -37,7 +37,7 @@ async function seedStudents() {
         update: {},
         create:{
             studentId: 'STUDENT_1',
-            email: 'msmacapagal@addu.edu.ph',
+            email: 'mscmapagal@addu.edu.ph',
             name: 'Matthew Sean C. Macapagal',
             department: 'School of Engineering and Architecture'
         }
@@ -84,6 +84,16 @@ async function seedCandidates() {
             candidateId: 'CANDIDATE_2',
             positionId: PRESIDENT25_ID,
             studentId: 'STUDENT_2'
+        }
+    })
+
+    await prisma.candidate.upsert({
+        where: { candidateId: 'CANDIDATE_3'},
+        update: {},
+        create:{
+            candidateId: 'CANDIDATE_3',
+            positionId: PRESIDENT25_ID,
+            studentId: 'STUDENT_3'
         }
     })
 }
