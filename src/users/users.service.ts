@@ -10,6 +10,7 @@ export class UsersService {
      * @returns a promise that resolves an array of student objects
      */
     async findAllStudents() {
+        
         return this.prisma.student.findMany()
     }
 }
