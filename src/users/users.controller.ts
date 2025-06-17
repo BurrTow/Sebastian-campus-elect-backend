@@ -2,6 +2,7 @@ import { Controller, Get } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service'
 import { ApiOperation, ApiResponse } from '@nestjs/swagger' 
 import { ReturnedStudentsDto } from 'src/users/dto/students.dto'
+import { Student } from '@prisma/client'
 
 @Controller('users')
 export class UsersController {
@@ -25,7 +26,7 @@ export class UsersController {
     })
 
 
-    async findAllStudents() {
+    async findAllStudents(): Promise<Student[]> {
         return await this.usersService.findAllStudents()
     }
 
