@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/prisma.service'
 import { Student } from '@prisma/client'
 
@@ -14,4 +14,28 @@ export class UsersService {
     
         return this.prisma.student.findMany()
     }
+
+
+
+    /**
+     * Returns a studend by their ID
+     * @returns
+     */
+    async findStudentById({ id }: {id: Student['studentId']}): Promise<Student> {
+        const student = await this.prisma.student.findUnique({
+            where: {
+                studentId: id
+            }
+        })
+
+        if(!student){
+            // Use Notification for proper HTTP handling
+            // @see @nest/common
+            throw new NotFoundException('Student cannot be found')
+        }
+
+        return student
+    }
+
+    
 }
