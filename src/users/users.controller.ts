@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service'
-import { ApiOperation, ApiResponse } from '@nestjs/swagger' 
+import { ApiNotFoundResponse, ApiOperation, ApiQuery, ApiResponse } from '@nestjs/swagger' 
 import { ReturnedStudentsDto } from 'src/users/dto/students.dto'
 import { Student } from '@prisma/client'
 
@@ -11,18 +11,18 @@ export class UsersController {
     @Get('students')
     @ApiOperation({
         summary: "Get all students",
-        description: "Returns a list of all students in the system."
+        description: "Returns a list of all students in the system.",
     })
 
     @ApiResponse({
         status: 200,
         description: 'List of all students retrieved successfully',
-        type: [ReturnedStudentsDto]
+        type: [ReturnedStudentsDto],
     })
 
     @ApiResponse({
         status: 500,
-        description: 'an error occurred'
+        description: 'an error occurred',
     })
 
 
@@ -31,12 +31,35 @@ export class UsersController {
     }
 
     @Get('students/find')
+        @ApiOperation({
+            summary: 'Finds students by ID',
+            description: 'Returns a student thta matches the provided ID.',
+        })
+
+    @ApiQuery({
+        name: 'id',
+        required: true,
+        description: 'The unique identifier of the student to find.',
+        example: 'STUDENT_1',
+        type: 'string',
+    })
+
+    @ApiResponse({
+        status: 200,
+        description: 'Student found successfully.',
+        type: ReturnedStudentsDto,
+    })
+
+    @ApiNotFoundResponse({
+        description: 'Student not found.',
+    })
+
     async findStudentById(
-        @Query('id') id: Student['studentId']
-    ){
+        @Query('id') id: Student['studentId'],
+    ): Promise<Student>{
 
         return await this.usersService.findStudentById({
-            id: id
+            id: id,
         })
     }
 }
