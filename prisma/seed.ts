@@ -37,8 +37,8 @@ async function seedStudents() {
         update: {},
         create:{
             studentId: 'STUDENT_1',
-            email: 'mscmapagal@addu.edu.ph',
-            name: 'Matthew Sean C. Macapagal',
+            email: '@btoww@addu.edu.ph',
+            name: 'Burr Toww',
             department: 'School of Engineering and Architecture'
         }
     })
